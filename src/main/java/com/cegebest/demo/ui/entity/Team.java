@@ -41,7 +41,4 @@ public class Team {
 	public void addProject(Project project) {
 		projects.add(project);
 	}
-	
-	
-	
 }
