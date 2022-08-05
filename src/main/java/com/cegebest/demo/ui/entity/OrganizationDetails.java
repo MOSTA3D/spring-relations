@@ -1,5 +1,6 @@
 package com.cegebest.demo.ui.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table(name="organization_details")
 @Entity
@@ -32,13 +35,25 @@ public class OrganizationDetails {
 	@Column
 	private String name;
 	
-//	@OneToOne(mappedBy="organization_details")
-//	private Organization
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="org_id", referencedColumnName="id")
+	private Organization organization;
 	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="organizationDetails")
+	private List<Team> teams = new ArrayList<>();	
+	
+	public Organization getOrganization() {
+		return organization;
+	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="org_details_id", referencedColumnName="id")
-	private List<Team> teams;
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+	public void addTeam(Team team) {
+		teams.add(team);
+	}
 
 	public Long getId() {
 		return id;

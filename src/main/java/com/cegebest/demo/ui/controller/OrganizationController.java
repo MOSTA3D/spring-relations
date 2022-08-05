@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cegebest.demo.ui.entity.OrganizationDetails;
+import com.cegebest.demo.ui.entity.Team;
 import com.cegebest.demo.ui.service.OrganizationService;
 
 @RestController
 @RequestMapping("/organization")
-public class Organization {
+public class OrganizationController {
 	@Autowired
 	private OrganizationService organizationService;
 	
@@ -51,4 +52,9 @@ public class Organization {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@PostMapping("/{id}/team")
+	public ResponseEntity<Object> addTeam(@PathVariable Long id, @RequestBody Team team){
+		organizationService.addTeam(id, team);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 }

@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Table
 @Entity
 public class Project {
@@ -32,6 +34,7 @@ public class Project {
 	@Column
 	private String name;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="assigned_projects",

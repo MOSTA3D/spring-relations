@@ -17,7 +17,7 @@
 ////
 //
 //@SpringBootTest
-//class CrudRelationsApplicationTests {
+//class CrudRelationsApplicationTests2 {
 //		
 //	@Autowired
 //	private ProjectService projectService;

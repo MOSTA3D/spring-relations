@@ -32,13 +32,13 @@ public class ProjectService {
 		projectRepo.save(project);
 	}
 	
-	public void updateProject(Project project, Long id) {
+	public void update(Project project, Long id) {
 		Project projectRet = projectRepo.findById(id).get();
 		projectRet.setName(project.getName());
 		projectRepo.save(project);
 	}
 	
-	public void deleteProject(Long id) {
+	public void delete(Long id) {
 		projectRepo.deleteById(id);
 	}
 }

@@ -1,4 +1,5 @@
 package com.cegebest.demo.ui.entity;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,11 +28,44 @@ public class Organization {
 		generator = "product_sequence"
 	)
 	private Long id;
-
+	
 	@Column
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="Org_details_id", referencedColumnName = "id")
-	private OrganizationDetails orgDetials; 
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "organization")
+	private OrganizationDetails orgDetails;
+	
+	public Organization() {}
+	
+	public Organization(String name) {
+		this.name = name;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public OrganizationDetails getOrgDetails() {
+		return orgDetails;
+	}
+
+	public void setOrgDetails(OrganizationDetails orgDetails) {
+		this.orgDetails = orgDetails;
+	}
+
+	
+	
+	
 }

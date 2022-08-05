@@ -6,13 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cegebest.demo.ui.entity.Organization;
 import com.cegebest.demo.ui.entity.OrganizationDetails;
+import com.cegebest.demo.ui.entity.Team;
 import com.cegebest.demo.ui.repository.OrganizationDetailsRepo;
+import com.cegebest.demo.ui.repository.OrganizationRepo;
 
 @Service
 public class OrganizationService {
 	@Autowired
 	private OrganizationDetailsRepo organizationDetailsRepo;
+	
+	@Autowired
+	private OrganizationRepo organizationRepo;
 	
 	public List<OrganizationDetails> getAll(){
 		return organizationDetailsRepo.findAll();
@@ -27,6 +33,8 @@ public class OrganizationService {
 	}
 	
 	public void create(OrganizationDetails organizationDetails) {
+		Organization organization = new Organization(organizationDetails.getName());
+		organizationRepo.save(organization);
 		organizationDetailsRepo.save(organizationDetails);
 	}
 	
@@ -38,5 +46,10 @@ public class OrganizationService {
 	
 	public void delete(Long id) {
 		organizationDetailsRepo.deleteById(id);
+	}
+	
+	public void addTeam(Long id, Team team) {
+		OrganizationDetails organization = organizationDetailsRepo.findById(id).get();
+		organization.addTeam(team);
 	}
 }
